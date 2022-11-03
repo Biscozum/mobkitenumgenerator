@@ -1,0 +1,11 @@
+# Read about `build.yaml` at https://pub.dev/packages/build_config
+builders:
+  # name of the builder
+
+  mobkit_generator:
+    import: "package:mobkit_generator/builder.dart"
+    builder_factories: ["enumBuilder"]
+    build_extensions: {".dart": ["library_source.g.dart"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

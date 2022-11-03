@@ -1,0 +1,1 @@
+library mobkit_generator;
