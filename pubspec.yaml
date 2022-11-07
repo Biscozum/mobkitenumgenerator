@@ -1,6 +1,6 @@
 name: mobkit_generator
 description: Flutter Code Generation.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/Biscozum/mobkitgenerator
 
 environment:
