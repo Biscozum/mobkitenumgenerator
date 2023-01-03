@@ -16,7 +16,9 @@ Provides Dart Build System builders for handling Enum.
 ## Setup
 
 To configure your project for the latest released version of `mobkit_generator`, see the example.
-
+```dart
+flutter pub add -d mobkit_generator
+```
 ## Example
 
 Given a library example.dart with an Person enum annotated with `EnumSerializable`:

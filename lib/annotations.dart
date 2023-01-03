@@ -1,6 +1,7 @@
 class EnumSerializable {
   final Type e;
-  const EnumSerializable(this.e);
+  final bool isDescription;
+  const EnumSerializable(this.e, this.isDescription);
 }
 
 class EnumValue {
