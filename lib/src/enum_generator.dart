@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/element/type.dart';
-import 'package:mobkit_generator/annotations.dart';
+import 'package:mobkit_enum_generator/annotations.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/constant/value.dart';

@@ -15,20 +15,20 @@ Provides Dart Build System builders for handling Enum.
 
 ## Setup
 
-To configure your project for the latest released version of `mobkit_generator`, see the example.
+To configure your project for the latest released version of `mobkit_enum_generator`, see the example. If you want to get annotation with Enums, you must set the Description of EnumSerializable annotation to true
 ```dart
-flutter pub add -d mobkit_generator
+flutter pub add -d mobkit_enum_generator
 ```
 ## Example
 
 Given a library example.dart with an Person enum annotated with `EnumSerializable`:
 
 ```dart
-import 'package:mobkit_generator/annotations.dart';
+import 'package:mobkit_enum_generator/annotations.dart';
 
 part 'example.g.dart'
 
-@EnumSerializable(String)
+@EnumSerializable(String, false)
 enum PersonStr {
   @EnumValue('John')
   name,
@@ -36,11 +36,11 @@ enum PersonStr {
   number,
 }
 
-@EnumSerializable(int)
+@EnumSerializable(int, true)
 enum PersonInt {
-  @EnumValue(1)
+  @EnumValue(1, 'description')
   name,
-  @EnumValue('66')
+  @EnumValue({'66', 'description'})
   number,
 }
 ```
@@ -60,7 +60,6 @@ extension PersonStrExtension on PersonStr {
   }
 }
 
-
 const Map<PersonInt, int> PersonIntEnumMap = {
   PersonInt.name: 1,
   PersonInt.number: 66,
@@ -69,6 +68,20 @@ const Map<PersonInt, int> PersonIntEnumMap = {
 extension PersonIntExtension on PersonInt {
   int toValue() {
     return personIntEnumMap[this]!;
+  }
+}
+
+
+extension PersonIntDescriptionExtension on PersonInt {
+  String toDescription() {
+    switch (this) {
+      case PersonInt.name:
+        return 'description';
+      case PersonInt.number:
+        return 'description';
+      default:
+        return '';
+    }
   }
 }
 
@@ -97,7 +110,7 @@ import 'package:mobkit_generator/annotations.dart';
 
 part 'example.g.dart'
 
-@EnumSerializable()
+@EnumSerializable(String, false)
 enum Person {
   @EnumValue('John')
   name,

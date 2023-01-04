@@ -1,4 +1,4 @@
-name: mobkit_generator
+name: mobkit_enum_generator
 description: Flutter Code Generation.
 version: 0.0.3
 repository: https://github.com/Biscozum/mobkitgenerator

@@ -42,8 +42,7 @@ extension LoginResultDescriptionExtension on LoginResult {
   }
 }
 
-const Map<LoginResultWithoutDescription, int>
-    loginResultWithoutDescriptionEnumMap = {
+const Map<LoginResultWithoutDescription, int> loginResultWithoutDescriptionEnumMap = {
   LoginResultWithoutDescription.success: 1,
   LoginResultWithoutDescription.invalidLogin: 2,
   LoginResultWithoutDescription.lockedOut: 10,
@@ -52,8 +51,7 @@ const Map<LoginResultWithoutDescription, int>
   LoginResultWithoutDescription.invalidCode: 1,
 };
 
-extension LoginResultWithoutDescriptionExtension
-    on LoginResultWithoutDescription {
+extension LoginResultWithoutDescriptionExtension on LoginResultWithoutDescription {
   int toValue() {
     return loginResultWithoutDescriptionEnumMap[this]!;
   }
