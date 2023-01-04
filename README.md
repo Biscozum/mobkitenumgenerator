@@ -28,19 +28,19 @@ import 'package:mobkit_enum_generator/annotations.dart';
 
 part 'example.g.dart'
 
-@EnumSerializable(String, false)
+@EnumSerializable(String, null)
 enum PersonStr {
-  @EnumValue('John')
+  @JsonValue('John')
   name,
-  @EnumValue('66')
+  @JsonValue('66')
   number,
 }
 
-@EnumSerializable(int, true)
+@EnumSerializable(int, ["name description", "number description"])
 enum PersonInt {
-  @EnumValue(1, 'description')
+  @JsonValue(1)
   name,
-  @EnumValue({'66', 'description'})
+  @JsonValue('66')
   number,
 }
 ```
@@ -76,9 +76,9 @@ extension PersonIntDescriptionExtension on PersonInt {
   String toDescription() {
     switch (this) {
       case PersonInt.name:
-        return 'description';
+        return 'name description';
       case PersonInt.number:
-        return 'description';
+        return 'number description';
       default:
         return '';
     }
@@ -110,7 +110,7 @@ import 'package:mobkit_enum_generator/annotations.dart';
 
 part 'example.g.dart'
 
-@EnumSerializable(String, false)
+@EnumSerializable(String, null)
 enum Person {
   @EnumValue('John')
   name,
