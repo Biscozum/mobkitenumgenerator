@@ -139,7 +139,7 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
               );
             }
             classBuffer.writeln("case ${element.name}.${element.fields[i].name}:");
-            classBuffer.writeln("return '${valueDynamic}';");
+            classBuffer.writeln("return '$valueDynamic';");
           }
         } else if (element.fields[i].metadata.isEmpty) {
           classBuffer.writeln("case ${element.name}.${element.fields[i].name}:");
