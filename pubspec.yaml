@@ -1,5 +1,5 @@
 name: mobkit_enum_generator
-description: Flutter Code Generation.
+description: Provides Dart Build System builders for handling Enum.
 version: 0.0.3
 repository: https://github.com/Biscozum/mobkitgenerator
 
