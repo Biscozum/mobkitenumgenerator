@@ -5,6 +5,7 @@ import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 
+// It is a GeneratorFotAnnotation type class that performs all Enum generate operations.
 class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
   @override
   List<String> generateForAnnotatedElement(
@@ -31,13 +32,18 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     String cpClassName = element.name.toCapitalized();
     String cpEditedClassName = "${cpClassName}EnumMap";
     ElementAnnotation itemType = element.metadata.first;
-    DartType? objectType = itemType.computeConstantValue()!.getField("e")!.toTypeValue();
+    DartType? objectType =
+        itemType.computeConstantValue()!.getField("e")!.toTypeValue();
     String typeStr = objectType!.isDartCoreInt ? "int" : "String";
     List<DartObject> nullList = [];
     // To get explanation from enums, it is checked whether the entered list is full or empty.
-    List<DartObject> descriptionList =
-        itemType.computeConstantValue()!.getField("descriptionList")!.toListValue() ?? nullList;
-    classBuffer.writeln("const Map<${element.name}, $typeStr>${cpClassName}EnumMap = {");
+    List<DartObject> descriptionList = itemType
+            .computeConstantValue()!
+            .getField("descriptionList")!
+            .toListValue() ??
+        nullList;
+    classBuffer.writeln(
+        "const Map<${element.name}, $typeStr>${cpClassName}EnumMap = {");
     for (int i = 0; i < element.fields.length - 1; i++) {
       if (element.fields[i].metadata.isNotEmpty) {
         ElementAnnotation item = element.fields[i].metadata.first;
@@ -57,7 +63,8 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
                 element: element,
               );
             }
-            classBuffer.writeln("${element.name}.${element.fields[i].name} : $valueDynamic,");
+            classBuffer.writeln(
+                "${element.name}.${element.fields[i].name} : $valueDynamic,");
           } else if (objectType.isDartCoreString) {
             valueDynamic = object.getField("value")!.toStringValue();
             if (valueDynamic == null) {
@@ -72,9 +79,11 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
               );
             }
             if (valueDynamic.toString().isEmpty) {
-              classBuffer.writeln("${element.name}.${element.fields[i].name} : ${'""'},");
+              classBuffer.writeln(
+                  "${element.name}.${element.fields[i].name} : ${'""'},");
             } else if (valueDynamic.toString().isNotEmpty) {
-              classBuffer.writeln("${element.name}.${element.fields[i].name} : '$valueDynamic',");
+              classBuffer.writeln(
+                  "${element.name}.${element.fields[i].name} : '$valueDynamic',");
             }
           }
         }
@@ -83,7 +92,8 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
       }
     }
     classBuffer.writeln("};");
-    classBuffer.writeln("extension ${element.name}Extension on ${element.name} {");
+    classBuffer
+        .writeln("extension ${element.name}Extension on ${element.name} {");
     classBuffer.writeln("$typeStr toValue() {");
     classBuffer.writeln("return $cpEditedClassName[this]!;");
     classBuffer.writeln("}");
@@ -92,7 +102,8 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     // If the list entered to get the description is full, the comments in the list are assigned to the corresponding enums.
 
     if (descriptionList.isNotEmpty) {
-      classBuffer.writeln("extension ${element.name}DescriptionExtension on ${element.name} {");
+      classBuffer.writeln(
+          "extension ${element.name}DescriptionExtension on ${element.name} {");
       classBuffer.writeln("String toDescription() {");
       classBuffer.writeln("switch(this) {");
       for (int i = 0; i < element.fields.length - 1; i++) {
@@ -101,13 +112,16 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
           DartObject? object = item.computeConstantValue();
           dynamic valueDynamic;
           if (object != null) {
-            valueDynamic =
-                descriptionList.asMap().containsKey(i) ? descriptionList[i].toStringValue() : (i + 1).toString();
-            classBuffer.writeln("case ${element.name}.${element.fields[i].name}:");
+            valueDynamic = descriptionList.asMap().containsKey(i)
+                ? descriptionList[i].toStringValue()
+                : (i + 1).toString();
+            classBuffer
+                .writeln("case ${element.name}.${element.fields[i].name}:");
             classBuffer.writeln("return '$valueDynamic';");
           }
         } else if (element.fields[i].metadata.isEmpty) {
-          classBuffer.writeln("case ${element.name}.${element.fields[i].name}:");
+          classBuffer
+              .writeln("case ${element.name}.${element.fields[i].name}:");
           classBuffer.writeln("return " "$i" ";");
         }
       }
@@ -124,5 +138,6 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
 
 //Method does transform first letter a uppercase of the String or returns empty String
 extension StringCasingExtension on String {
-  String toCapitalized() => length > 0 ? substring(0, 1).toLowerCase() + substring(1, length) : '';
+  String toCapitalized() =>
+      length > 0 ? substring(0, 1).toLowerCase() + substring(1, length) : '';
 }
