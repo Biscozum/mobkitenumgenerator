@@ -1,6 +1,5 @@
+import 'package:example/example.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'test_enum.dart';
 
 part 'test_class.g.dart';
 
@@ -9,7 +8,7 @@ class TestClass {
   String id;
   String name;
   int age;
-  TestEnum testEnum;
+  ExampleEnum testEnum;
 
   TestClass(
       {required this.id,
