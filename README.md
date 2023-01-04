@@ -106,7 +106,7 @@ The only annotation required to use this package is EnumValues. When applied to 
 Annotation can be added on `Enum` with `JsonValue` and `Enum Value`.
 
 ```dart
-import 'package:mobkit_generator/annotations.dart';
+import 'package:mobkit_enum_generator/annotations.dart';
 
 part 'example.g.dart'
 

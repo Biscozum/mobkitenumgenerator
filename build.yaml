@@ -2,7 +2,7 @@
 builders:
   # name of the builder
 
-  mobkit_generator:
+  mobkit_enum_generator:
     import: "package:mobkit_enum_generator/builder.dart"
     builder_factories: ["enumBuilder"]
     build_extensions: {".dart": ["library_source.g.dart"]}

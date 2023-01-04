@@ -1,1 +1,1 @@
-library mobkit_generator;
+library mobkit_enum_generator;
