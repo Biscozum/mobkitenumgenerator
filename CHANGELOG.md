@@ -10,3 +10,7 @@
 
 * Add Description with Annotation
 
+## 0.0.4
+
+* Enum annotations are taken in Annotation.
+

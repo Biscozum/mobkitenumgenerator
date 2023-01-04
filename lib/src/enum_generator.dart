@@ -33,7 +33,10 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     ElementAnnotation itemType = element.metadata.first;
     DartType? objectType = itemType.computeConstantValue()!.getField("e")!.toTypeValue();
     String typeStr = objectType!.isDartCoreInt ? "int" : "String";
-    bool typeIsDescription = itemType.computeConstantValue()!.getField("isDescription")!.toBoolValue() ?? false;
+    List<DartObject> nullList = [];
+    // To get explanation from enums, it is checked whether the entered list is full or empty.
+    List<DartObject> descriptionList =
+        itemType.computeConstantValue()!.getField("descriptionList")!.toListValue() ?? nullList;
     classBuffer.writeln("const Map<${element.name}, $typeStr>${cpClassName}EnumMap = {");
     for (int i = 0; i < element.fields.length - 1; i++) {
       if (element.fields[i].metadata.isNotEmpty) {
@@ -41,9 +44,10 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
         DartObject? object = item.computeConstantValue();
         dynamic valueDynamic;
         if (object != null) {
-          if (objectType.isDartCoreInt && !typeIsDescription) {
+          if (objectType.isDartCoreInt) {
             valueDynamic = object.getField("value")!.toIntValue();
             if (valueDynamic == null) {
+              // An error is thrown if a different type than the specified value type is detected.
               throw InvalidGenerationSourceError(
                 'Specifying a int in '
                 '@EnumSerializable'
@@ -54,41 +58,10 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
               );
             }
             classBuffer.writeln("${element.name}.${element.fields[i].name} : $valueDynamic,");
-          } else if (objectType.isDartCoreString && !typeIsDescription) {
+          } else if (objectType.isDartCoreString) {
             valueDynamic = object.getField("value")!.toStringValue();
             if (valueDynamic == null) {
-              throw InvalidGenerationSourceError(
-                'Specifying a String in '
-                '@EnumSerializable'
-                ' uses an int value in '
-                '@EnumValue'
-                '.',
-                element: element,
-              );
-            }
-            if (valueDynamic.toString().isEmpty) {
-              classBuffer.writeln("${element.name}.${element.fields[i].name} : ${'""'},");
-            } else if (valueDynamic.toString().isNotEmpty) {
-              classBuffer.writeln("${element.name}.${element.fields[i].name} : '$valueDynamic',");
-            }
-          } else if (objectType.isDartCoreInt && typeIsDescription) {
-            Set<DartObject>? mySet = object.getField("value")!.toSetValue();
-            valueDynamic = mySet!.elementAt(0).toIntValue();
-            if (valueDynamic == null) {
-              throw InvalidGenerationSourceError(
-                'Specifying a String in '
-                '@EnumSerializable'
-                ' uses an int value in '
-                '@EnumValue'
-                '.',
-                element: element,
-              );
-            }
-            classBuffer.writeln("${element.name}.${element.fields[i].name} : $valueDynamic,");
-          } else if (objectType.isDartCoreString && typeIsDescription) {
-            Set<DartObject>? mySet = object.getField("value")!.toSetValue();
-            valueDynamic = mySet!.elementAt(0).toStringValue();
-            if (valueDynamic == null) {
+              // An error is thrown if a different type than the specified value type is detected.
               throw InvalidGenerationSourceError(
                 'Specifying a String in '
                 '@EnumSerializable'
@@ -116,7 +89,9 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     classBuffer.writeln("}");
     classBuffer.writeln("}");
 
-    if (typeIsDescription) {
+    // If the list entered to get the description is full, the comments in the list are assigned to the corresponding enums.
+
+    if (descriptionList.isNotEmpty) {
       classBuffer.writeln("extension ${element.name}DescriptionExtension on ${element.name} {");
       classBuffer.writeln("String toDescription() {");
       classBuffer.writeln("switch(this) {");
@@ -126,18 +101,8 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
           DartObject? object = item.computeConstantValue();
           dynamic valueDynamic;
           if (object != null) {
-            Set<DartObject>? mySet = object.getField("value")!.toSetValue();
-            valueDynamic = mySet!.elementAt(1).toStringValue();
-            if (valueDynamic == null) {
-              throw InvalidGenerationSourceError(
-                'Specifying a String in '
-                '@EnumSerializable'
-                ' uses an int value in '
-                '@EnumValue'
-                '.',
-                element: element,
-              );
-            }
+            valueDynamic =
+                descriptionList.asMap().containsKey(i) ? descriptionList[i].toStringValue() : (i + 1).toString();
             classBuffer.writeln("case ${element.name}.${element.fields[i].name}:");
             classBuffer.writeln("return '$valueDynamic';");
           }
@@ -152,6 +117,7 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
       classBuffer.writeln("}");
       classBuffer.writeln("}");
     }
+
     return classBuffer.toString();
   }
 }
