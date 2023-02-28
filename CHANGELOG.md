@@ -18,3 +18,14 @@
 
 * Added Example project.
 
+## 0.0.6
+
+* Added fromValue method.
+
+## 0.0.7
+
+* fromValue bug fix.
+
+## 0.0.8
+
+* fromValue bug fix.
