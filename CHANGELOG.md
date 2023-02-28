@@ -18,3 +18,7 @@
 
 * Added Example project.
 
+## 0.0.6
+
+* Added fromValue method.
+
