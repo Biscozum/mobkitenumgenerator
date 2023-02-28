@@ -88,11 +88,11 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     classBuffer.writeln("$typeStr toValue() {");
     classBuffer.writeln("return $cpEditedClassName[this]!;");
     classBuffer.writeln("}");
-    classBuffer.writeln("${element.name} fromValue(int id){");
-    classBuffer.writeln("return $cpEditedClassName.keys.firstWhere((element) => $cpEditedClassName[element] == id);");
-    classBuffer.writeln("}");
     classBuffer.writeln("}");
 
+    classBuffer.writeln("${element.name} ${cpClassName}FromValue(int id) = {");
+    classBuffer.writeln("return $cpEditedClassName.keys.firstWhere((element) => $cpEditedClassName[element] == id);");
+    classBuffer.writeln("}");
     // If the list entered to get the description is full, the comments in the list are assigned to the corresponding enums.
 
     if (descriptionList.isNotEmpty) {

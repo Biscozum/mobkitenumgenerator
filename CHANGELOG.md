@@ -22,3 +22,6 @@
 
 * Added fromValue method.
 
+## 0.0.7
+
+* fromValue bug fix.
