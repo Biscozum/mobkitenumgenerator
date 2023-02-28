@@ -22,7 +22,8 @@ extension ExampleEnumExtension on ExampleEnum {
 }
 
 ExampleEnum exampleEnumFromValue(int id) {
-  return exampleEnumEnumMap.keys.firstWhere((element) => exampleEnumEnumMap[element] == id);
+  return exampleEnumEnumMap.keys
+      .firstWhere((element) => exampleEnumEnumMap[element] == id);
 }
 
 extension ExampleEnumDescriptionExtension on ExampleEnum {
