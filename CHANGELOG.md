@@ -33,3 +33,7 @@
 ## 0.0.9
 
 * Flutter version update for 3.10.0.
+
+## 0.1.0
+
+* fromValue bug fix.
