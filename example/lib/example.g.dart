@@ -6,43 +6,22 @@ part of 'example.dart';
 // EnumGenerator
 // **************************************************************************
 
-const Map<ExampleEnum, int> exampleEnumEnumMap = {
-  ExampleEnum.success: 1,
-  ExampleEnum.invalidLogin: 2,
-  ExampleEnum.lockedOut: 3,
-  ExampleEnum.requiresTwoFactor: 4,
-  ExampleEnum.passwordExpired: 5,
-  ExampleEnum.invalidCode: 6,
+const Map<DailyPeriodCodeType, int> dailyPeriodCodeTypeEnumMap = {
+  DailyPeriodCodeType.morning: 1,
+  DailyPeriodCodeType.afternoon: 1,
+  DailyPeriodCodeType.fullDay: 1,
 };
 
-extension ExampleEnumExtension on ExampleEnum {
+extension DailyPeriodCodeTypeExtension on DailyPeriodCodeType {
   int toValue() {
-    return exampleEnumEnumMap[this]!;
+    return dailyPeriodCodeTypeEnumMap[this]!;
   }
 }
 
-ExampleEnum exampleEnumFromValue(int id) {
-  return exampleEnumEnumMap.keys
-      .firstWhere((element) => exampleEnumEnumMap[element] == id);
-}
-
-extension ExampleEnumDescriptionExtension on ExampleEnum {
-  String toDescription() {
-    switch (this) {
-      case ExampleEnum.success:
-        return 'succes description';
-      case ExampleEnum.invalidLogin:
-        return 'inalidLogin description';
-      case ExampleEnum.lockedOut:
-        return 'lockedOut';
-      case ExampleEnum.requiresTwoFactor:
-        return 'requiresTwoFactor';
-      case ExampleEnum.passwordExpired:
-        return 'passwordExpired';
-      case ExampleEnum.invalidCode:
-        return 'invalidCode';
-      default:
-        return '';
-    }
-  }
+DailyPeriodCodeType? dailyPeriodCodeTypeFromValue(int id) {
+  return dailyPeriodCodeTypeEnumMap.keys
+          .any((element) => dailyPeriodCodeTypeEnumMap[element] == id)
+      ? dailyPeriodCodeTypeEnumMap.keys
+          .firstWhere((element) => dailyPeriodCodeTypeEnumMap[element] == id)
+      : null;
 }
