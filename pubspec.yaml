@@ -1,6 +1,6 @@
 name: mobkit_enum_generator
 description: Provides Dart Build System builders for handling Enum. You can get values ​and descriptions from your enums.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/Biscozum/mobkitgenerator
 
 environment:
