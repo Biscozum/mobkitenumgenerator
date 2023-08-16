@@ -25,3 +25,10 @@ DailyPeriodCodeType? dailyPeriodCodeTypeFromValue(int id) {
           .firstWhere((element) => dailyPeriodCodeTypeEnumMap[element] == id)
       : null;
 }
+
+DailyPeriodCodeType? dailyPeriodCodeTypeFromJson(dynamic json) {
+  if (json is int) {
+    return dailyPeriodCodeTypeFromValue(json);
+  }
+  return null;
+}

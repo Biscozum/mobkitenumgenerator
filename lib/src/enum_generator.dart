@@ -96,6 +96,13 @@ class EnumGenerator extends GeneratorForAnnotation<EnumSerializable> {
     classBuffer.writeln(": null;");
     classBuffer.writeln("}");
 
+    classBuffer.writeln("${element.name}? ${cpClassName}FromJson(dynamic json){");
+    classBuffer.writeln("if(json is int) {");
+    classBuffer.writeln("return ${cpClassName}FromValue(json);");
+    classBuffer.writeln("}");
+    classBuffer.writeln("return null;");
+    classBuffer.writeln("}");
+
     // If the list entered to get the description is full, the comments in the list are assigned to the corresponding enums.
     if (descriptionList.isNotEmpty) {
       classBuffer.writeln("extension ${element.name}DescriptionExtension on ${element.name} {");
