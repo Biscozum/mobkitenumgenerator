@@ -37,3 +37,7 @@
 ## 0.1.0
 
 * fromValue bug fix.
+
+## 0.1.0
+
+* fromValue nullable added.
