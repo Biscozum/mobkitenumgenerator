@@ -45,3 +45,7 @@
 ## 0.1.2
 
 * fromJson nullable added.
+
+## 0.1.3
+
+* All of the package dependencies are supported in the latest version.
