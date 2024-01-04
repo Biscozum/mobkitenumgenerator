@@ -37,3 +37,11 @@
 ## 0.1.0
 
 * fromValue bug fix.
+
+## 0.1.1
+
+* fromValue nullable added.
+
+## 0.1.2
+
+* fromJson nullable added.
