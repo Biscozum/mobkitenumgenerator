@@ -49,3 +49,7 @@
 ## 0.1.3
 
 * All of the package dependencies are supported in the latest version.
+
+## 0.1.4
+
+* fromValue method was edited according to the given type.
