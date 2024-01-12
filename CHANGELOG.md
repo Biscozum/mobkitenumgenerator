@@ -53,3 +53,7 @@
 ## 0.1.4
 
 * fromValue method was edited according to the given type.
+
+## 0.1.5
+
+* enum generator file formatted.
