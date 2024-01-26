@@ -57,3 +57,7 @@
 ## 0.1.5
 
 * enum generator file formatted.
+
+## 0.1.6
+
+* Topics added.
