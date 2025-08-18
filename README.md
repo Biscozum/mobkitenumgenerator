@@ -24,53 +24,87 @@ flutter pub add -d mobkit_enum_generator
 Given a library example.dart with an Person enum annotated with `EnumSerializable`:
 
 ```dart
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobkit_enum_generator/annotations.dart';
 
-part 'example.g.dart'
+part 'example.g.dart';
 
 @EnumSerializable(String, null)
 enum PersonStr {
   @JsonValue('John')
   name,
   @JsonValue('66')
-  number,
+  number;
+
+  static PersonStr? fromJson(dynamic json) => _$PersonStrFromJson(json);
 }
 
 @EnumSerializable(int, ["name description", "number description"])
 enum PersonInt {
   @JsonValue(1)
   name,
-  @JsonValue('66')
-  number,
+  @JsonValue(66)
+  number;
+
+  static PersonInt? fromJson(dynamic json) => _$PersonIntFromJson(json);
 }
+
 ```
 Building creates the corresponding part `example.g.dart`:
 ```dart
 part of 'example.dart';
 
-
-const Map<PersonStr, String> personStrEnumMap = {
+const Map<PersonStr, String> _$PersonStrEnumMap = {
   PersonStr.name: 'John',
   PersonStr.number: '66',
 };
 
 extension PersonStrExtension on PersonStr {
   String toValue() {
-    return personStrEnumMap[this]!;
+    return _$PersonStrEnumMap[this]!;
   }
 }
 
-const Map<PersonInt, int> PersonIntEnumMap = {
+PersonStr? _$PersonStrFromValue(String id) {
+  return _$PersonStrEnumMap.keys
+          .any((element) => _$PersonStrEnumMap[element] == id)
+      ? _$PersonStrEnumMap.keys
+          .firstWhere((element) => _$PersonStrEnumMap[element] == id)
+      : null;
+}
+
+PersonStr? _$PersonStrFromJson(dynamic json) {
+  if (json is String) {
+    return _$PersonStrFromValue(json);
+  }
+  return null;
+}
+
+const Map<PersonInt, int> _$PersonIntEnumMap = {
   PersonInt.name: 1,
   PersonInt.number: 66,
 };
 
 extension PersonIntExtension on PersonInt {
   int toValue() {
-    return personIntEnumMap[this]!;
+    return _$PersonIntEnumMap[this]!;
   }
 }
 
+PersonInt? _$PersonIntFromValue(int id) {
+  return _$PersonIntEnumMap.keys
+          .any((element) => _$PersonIntEnumMap[element] == id)
+      ? _$PersonIntEnumMap.keys
+          .firstWhere((element) => _$PersonIntEnumMap[element] == id)
+      : null;
+}
+
+PersonInt? _$PersonIntFromJson(dynamic json) {
+  if (json is int) {
+    return _$PersonIntFromValue(json);
+  }
+  return null;
+}
 
 extension PersonIntDescriptionExtension on PersonInt {
   String toDescription() {
@@ -79,11 +113,10 @@ extension PersonIntDescriptionExtension on PersonInt {
         return 'name description';
       case PersonInt.number:
         return 'number description';
-      default:
-        return '';
     }
   }
 }
+
 
 ```
 
@@ -115,5 +148,8 @@ enum Person {
   @EnumValue('John')
   name,
   @JsonValue('66')
-  number,
+  number;
+
+  static Person? fromJson(dynamic json) => _$PersonFromJson(json);
+
 }

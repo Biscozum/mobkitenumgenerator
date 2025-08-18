@@ -6,29 +6,65 @@ part of 'example.dart';
 // EnumGenerator
 // **************************************************************************
 
-const Map<DailyPeriodCodeType, int> dailyPeriodCodeTypeEnumMap = {
-  DailyPeriodCodeType.morning: 1,
-  DailyPeriodCodeType.afternoon: 1,
-  DailyPeriodCodeType.fullDay: 1,
+const Map<PersonStr, String> _$PersonStrEnumMap = {
+  PersonStr.name: 'John',
+  PersonStr.number: '66',
 };
 
-extension DailyPeriodCodeTypeExtension on DailyPeriodCodeType {
-  int toValue() {
-    return dailyPeriodCodeTypeEnumMap[this]!;
+extension PersonStrExtension on PersonStr {
+  String toValue() {
+    return _$PersonStrEnumMap[this]!;
   }
 }
 
-DailyPeriodCodeType? dailyPeriodCodeTypeFromValue(int id) {
-  return dailyPeriodCodeTypeEnumMap.keys
-          .any((element) => dailyPeriodCodeTypeEnumMap[element] == id)
-      ? dailyPeriodCodeTypeEnumMap.keys
-          .firstWhere((element) => dailyPeriodCodeTypeEnumMap[element] == id)
+PersonStr? _$PersonStrFromValue(String id) {
+  return _$PersonStrEnumMap.keys
+          .any((element) => _$PersonStrEnumMap[element] == id)
+      ? _$PersonStrEnumMap.keys
+          .firstWhere((element) => _$PersonStrEnumMap[element] == id)
       : null;
 }
 
-DailyPeriodCodeType? dailyPeriodCodeTypeFromJson(dynamic json) {
-  if (json is int) {
-    return dailyPeriodCodeTypeFromValue(json);
+PersonStr? _$PersonStrFromJson(dynamic json) {
+  if (json is String) {
+    return _$PersonStrFromValue(json);
   }
   return null;
+}
+
+const Map<PersonInt, int> _$PersonIntEnumMap = {
+  PersonInt.name: 1,
+  PersonInt.number: 66,
+};
+
+extension PersonIntExtension on PersonInt {
+  int toValue() {
+    return _$PersonIntEnumMap[this]!;
+  }
+}
+
+PersonInt? _$PersonIntFromValue(int id) {
+  return _$PersonIntEnumMap.keys
+          .any((element) => _$PersonIntEnumMap[element] == id)
+      ? _$PersonIntEnumMap.keys
+          .firstWhere((element) => _$PersonIntEnumMap[element] == id)
+      : null;
+}
+
+PersonInt? _$PersonIntFromJson(dynamic json) {
+  if (json is int) {
+    return _$PersonIntFromValue(json);
+  }
+  return null;
+}
+
+extension PersonIntDescriptionExtension on PersonInt {
+  String toDescription() {
+    switch (this) {
+      case PersonInt.name:
+        return 'name description';
+      case PersonInt.number:
+        return 'number description';
+    }
+  }
 }
