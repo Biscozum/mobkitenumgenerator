@@ -1,32 +1,35 @@
-## 0.0.1
+## 1.0.0
 
-* Package published
+### ⚠️ Breaking Changes
+* Removed `default` cases from `switch` statements in the generated `g.dart` file.  
+* Made the previously existing `fromJson` and `fromValue` methods in `g.dart` **private**.  
+* These methods can no longer be used directly. Instead, you should use **static methods** defined on the enum itself, as shown in the `example`.  
 
-## 0.0.2
+## 0.1.6
 
-* SDK Version updated
+* Topics added.
 
-## 0.0.3
+## 0.1.5
 
-* Add Description with Annotation
+* enum generator file formatted.
 
-## 0.0.4
+## 0.1.4
 
-* Enum annotations are taken in Annotation.
+* fromValue method was edited according to the given type.
 
-## 0.0.5
+## 0.1.3
 
-* Added Example project.
+* All of the package dependencies are supported in the latest version.
 
-## 0.0.6
+## 0.1.2
 
-* Added fromValue method.
+* fromJson nullable added.
 
-## 0.0.7
+## 0.1.1
 
-* fromValue bug fix.
+* fromValue nullable added.
 
-## 0.0.8
+## 0.1.0
 
 * fromValue bug fix.
 
@@ -34,30 +37,34 @@
 
 * Flutter version update for 3.10.0.
 
-## 0.1.0
+## 0.0.8
 
 * fromValue bug fix.
 
-## 0.1.1
+## 0.0.7
 
-* fromValue nullable added.
+* fromValue bug fix.
 
-## 0.1.2
+## 0.0.6
 
-* fromJson nullable added.
+* Added fromValue method.
 
-## 0.1.3
+## 0.0.5
 
-* All of the package dependencies are supported in the latest version.
+* Added Example project.
 
-## 0.1.4
+## 0.0.4
 
-* fromValue method was edited according to the given type.
+* Enum annotations are taken in Annotation.
 
-## 0.1.5
+## 0.0.3
 
-* enum generator file formatted.
+* Add Description with Annotation
 
-## 0.1.6
+## 0.0.2
 
-* Topics added.
+* SDK Version updated
+
+## 0.0.1
+
+* Package published
