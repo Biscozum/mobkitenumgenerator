@@ -1,3 +1,18 @@
+## 2.0.0
+
+**Dependency Updates**
+
+* Upgraded `analyzer` to ^8.4.0
+* Upgraded `build_runner` to ^2.10.0
+* Upgraded `build` to ^4.0.2
+* Upgraded `source_gen` to ^4.0.2
+
+**Compatibility**
+* Improved compatibility with the latest Dart/Flutter ecosystem
+* Better support for static analysis and code generation
+* Enhanced build performance and reliability
+
+
 ## 1.0.0
 
 ### ⚠️ Breaking Changes
